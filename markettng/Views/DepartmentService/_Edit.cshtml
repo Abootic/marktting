@@ -1,0 +1,46 @@
+﻿@model CommonVm<DepartmentServiceDto>
+<!--- Start form for Create -->
+
+<div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="exampleModalLabel">تعديل خدمة - </h5>
+    <button type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+</div>
+<div class="offcanvas-body flex-grow-1">
+    <form method="post" id="departmentServiceEdit" class="add-new-record row g-2 pt-0">
+        <input type="hidden" class="form-control" value="@Model.obj.DepartmentId" name="DepartmentId">
+        <input type="hidden" class="form-control" value="@Model.obj.Id" name="Id">
+
+
+        <div class="col-sm-12">
+            <label class="form-label" asp-for="obj.ServiceName"></label>
+
+            <input type="text" id="FacilityActivity" value="@Model.obj.ServiceName" class="form-control" name="ServiceName">
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback"></div>
+        </div>
+
+
+
+
+        <div class="col-sm-12">
+            <label class="form-label" asp-for="obj.other"></label>
+
+            <input type="text" id="other" value="@Model.obj.other" class="form-control" name="other">
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-sm-12">
+
+            <button type="submit" class="btn btn-primary d-grid w-100 mb-2 send-btn">اضافة</button>
+            <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                إلغاء
+            </button>
+            <div></div>
+        </div>
+    </form>
+</div>
+

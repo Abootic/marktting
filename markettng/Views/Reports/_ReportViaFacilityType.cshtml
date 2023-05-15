@@ -1,0 +1,101 @@
+﻿@using Base.Models.Entity;
+@using Base.Repositories.Interfaces;
+@model MainReportVm
+@inject IFacilityTypeRepository FacilityTypeManager
+@{
+    var FacilityTypeList = await FacilityTypeManager.GetAll();
+}
+@inject IServiceManager CustomConventer
+
+<style>
+    .reprt-btn-class{
+        margin-block: 19px;
+    }
+    .inner-form {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-inline: -288px;
+        margin-block: -5px;
+        width: 10rem;
+        justify-content: end;
+        margin-right: 23px;
+        display: grid;
+        padding-right: 40px;
+        padding-top: 11px;
+    }
+
+    #printReport {
+    }
+</style>
+<div class="card">
+    <div class="row">
+        <form method="post" id="reportFtypeVm" class="add-new-record row g-2 pt-0">
+ 
+
+            <div class="col-md-2 text-start  ">
+                <span class="form-label" for="date">التاريخ الحالي</span>
+                <input type="text" readonly id="toDate" style="color:black;background-color:yellow" name="toDate" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")" class="form-control " data-input>
+            </div>
+            <div class="col-md-2 text-start  ">
+                <span class="form-label" for="add-user-email">من تاريخ</span>
+                <input type="date" id="fromDate" placeholder="إختار تاريخ" name="fromDate" class="form-control" required>
+            </div>
+            @if (Model.reportVm.userId != "null")
+            {
+                <div class="col-md-2 text-center">
+                    <span class="form-label" for="add-user-email">نوع المنشأة</span>
+                    <select name="FacilityTypeId" class="form-control">
+                        <option value="cc"> إختار </option>
+                        @if (FacilityTypeList.Data.Any())
+                        {
+
+                            @foreach (var item in FacilityTypeList.Data)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+
+                            }
+                        }
+                    </select>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="userId" value="@Model.reportVm.userId">
+            }
+
+
+            <div class="col-md-2 text-center">
+
+                <button type="submit" class="btn btn-info d-grid w-100 mb-2 reprt-btn-class">
+                    اضافة
+                </button>
+            </div>
+             @if (TempData["check"] != null)
+            {
+                <div class="col-md-2 text-center">
+
+                <div  id="printReportAlis" class="btn btn-info d-grid w-100 mb-2 reprt-btn-class">
+                    طباعة
+                </div>
+            </div>
+            }
+          
+       
+    </form>
+        @if (TempData["check"] != null)
+        {
+            <form style="display:none" id="printReportVm" class="inner-form" method="post">
+                <input type="hidden" name="reportName" value="@CustomConventer.CustomConventer.EncodeJson(Model.data)">
+                <div id="printReport">
+
+                    <button type="submit" id="printReportIdd" class="btn btn-info d-grid w-100 mb-2 ">
+                        طباعة
+                    </button>
+                </div>
+            </form>
+        }
+
+    </div>
+
+   
+</div>

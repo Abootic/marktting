@@ -1,0 +1,45 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.th-heder {
+    text-align: center;
+}
+
+.td-tbody {
+    text-align: center;
+   
+}
+@media print {
+    
+    form, .card, .side-bar, .breadcrumb-wrapper {
+        visibility: hidden;
+    }
+    #report-table {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        bottom: 1rem;
+        /* margin: -25px;
+            visibility: visible;margin-block:10px;
+                
+        }
+}
+
+@media screen {
+   
+}

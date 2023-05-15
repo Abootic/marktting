@@ -1,0 +1,238 @@
+﻿@inject IServiceManager ServiceManager
+@model FacilityVm
+<style>
+    #note {
+        text-decoration: none;
+    }
+</style>
+<div class="content-wrapper">
+    <div class="card border-1 bg-card ">
+        <div class="card-body">
+            <h4 class="card-title">منشأة</h4>
+
+            <div class="dt-action-buttons text-end pt-3 pt-md-1">
+                <div class="dt-buttons">
+                    <button id="show-mmodel" type="button" class="btn btn-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAdd">إضافة منشأة</button>
+                </div>
+            </div>
+            <div class="table-responsive overflow-scroll" dir="rtl">
+
+                <table class="table table-striped table-bordered mt-1">
+                    <thead>
+                        <tr>
+
+                            <th class="th-heder">   @Html.LabelFor(a=>a.obj.FacilityTypeDto.Name)  </th>
+                            <th class="th-heder">   @Html.LabelFor(a=>a.obj.FacilityActivity)  </th>
+                            <th class="th-heder">   @Html.LabelFor(a=>a.obj.TradeName)   </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.SpecialistName) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.SpecialistAdjective) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.other) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.VisitDto.VisitTime) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.Address) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.communicationChannelDto.other) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.communicationChannelDto.PhoneNumber) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.communicationChannelDto.Link) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.VisitDto.Reason) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.visitResultDto.ResultType) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.visitResultDto.Message) </th>
+                            <th class="th-heder">  @Html.LabelFor(a=>a.obj.visitResultDto.Note) </th>
+                            <th class="th-heder">  الاجرئات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.facilityDatas != null)
+                        {
+
+                            @foreach (var item in Model.facilityDatas)
+                            {
+                                <tr>
+
+                                    <td class="td-tbody">@item.FacilityType</td>
+                                    <td class="td-tbody">@item.FacilityActivity</td>
+                                    <td class="td-tbody">@item.TradeName</td>
+                                    <td class="td-tbody">@item.SpecialistName </td>
+                                    <td class="td-tbody">@item.SpecialistAdjective</td>
+                                    <td class="td-tbody">@item.OwnerName</td>
+                                    <td class="td-tbody">@item.VisitTime</td>
+                                    <td class="td-tbody">@item.Address</td>
+                                    <td class="td-tbody">@item.FPhoneNumber</td>
+                                    <td class="td-tbody">@item.OPhoneNumber </td>
+                                    <td class="td-tbody">@item.Link </td>
+                                  @*  <td class="td-tbody">@item.Reason</td>*@
+                                    @if (!string.IsNullOrWhiteSpace(item.Reason))
+                                    {
+                                        @if (item.Reason.Length >= 10)
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Reason.Substring(0,10);
+                                                <a value="@item.Reason" class="text-center d-flex" id="resone" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNote">قرأة المزيد</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Reason
+                                            </td>
+
+                                        }
+                                    }else
+
+                                    {
+                                        <td class="td-tbody">
+                                            @item.Reason
+                                        </td>
+                                    }
+
+                                    <td class="td-tbody"> @item.ResultType</td>
+                                    <td class="td-tbody">@item.Message</td>
+
+                                    @if (!string.IsNullOrWhiteSpace(item.Note))
+                                    {
+                                        @if (item.Note.Length >= 10)
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Note.Substring(0,10);
+                                                <a value=" @item.Note" class="text-center d-flex" id="note" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNote">قرأة المزيد</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Note
+                                            </td>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td class="td-tbody">
+                                            @item.Note
+                                        </td>
+
+                                    }
+                                    <td class="td-tbody">
+                                        <div class="btn-group dropend">
+                                            <span class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <i class="ai-dots-vertical"></i></span>
+                                            <div class="dropdown-menu mx-1">
+                                                <a class="dropdown-item edit-btn" value="@ServiceManager.SecurityDataProtector.Encode(item.Id.ToString())" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEdit">تعديل </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item delete-btn" value="@ServiceManager.SecurityDataProtector.Encode(item.Id.ToString())">خذف </a>
+                                                <div class="dropdown-divider"></div>
+                                                @*                    <a class="route dropdown-item" id="rotee" value="../VisitResult/Index?id=@ServiceManager.SecurityDataProtector.Encode(item.Id.ToString())">نتاْئج الزيارة </a>
+                                        <div class="dropdown-divider"></div>*@
+                                                <a class="route dropdown-item" id="rotee" value="../OrderResult/Index?id=@ServiceManager.SecurityDataProtector.Encode(item.Id.ToString())">  طلب خدمة</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<partial id="p-note" style="display:none" name="../NoteReader/_note.cshtml" />
+@*<start partial addd*@
+<partial name="_Add" />
+<div class="offcanvas offcanvas-end" id="offcanvasEdit">
+    <partial name="_Edit" />
+</div>
+
+
+
+<script type="module">
+    //////////////// import the function
+    import { getRemove } from '../js/delete.js';
+    import { GetEditingObjById } from '../js/edit.js';
+    import Edit from '../js/edit.js';
+    import { post } from "../js/post.js";
+    import { routting } from "../js/routting.js";
+
+    ///////////////////////////////////// end omport function
+    ////////// start Delete  ///////////////
+    $(".delete-btn").on("click", function () {
+        let value = $(this).attr("value");
+        getRemove(value, '../Facility/Delete', "../Facility/Index");
+    });
+    ///////////////// end delete /////////
+    /////////// start GetEditingObjById /////////////////////
+    $(".edit-btn").on("click", function () {
+
+        let value = $(this).attr("value");
+        GetEditingObjById(value, '../Facility/GetEdit');
+    });
+
+
+    //////////////////// start Edit ///////////////////
+    $(document).on("submit", "#facilityEdit", (e) => {
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        Edit("../Facility/Edit", "facilityEdit", "../Facility/Index");
+
+    });
+    ////////////////// end Edit
+
+    //////////////////// start post
+
+    $(document).on("submit", "#facilityDto", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        post("../Facility/Add", "facilityDto", false, "../Facility/Index");
+
+
+    });
+    $(document).ready(function () {
+        $(".route").on("click", function () {
+
+            let value = $(this).attr("value");
+
+            routting(value, false);
+        });
+
+    });
+    ////// note
+    //$(document).on("click", "#note", function () {
+    //    //  $(this).attr("value");
+    //    $("#p-note").show();
+
+    //    $("#note-letter").val($(this).attr("value"));
+    //});
+    //       ////////////                                 ///////////////// end post
+</script>
+
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "_LoginLayout";
+}
+@model LoginVm
+<div class="authentication-wrapper authentication-cover">
+    <div class="authentication-inner row m-0">
+        <!-- /Left Text -->
+        <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center">
+            <div class="flex-row text-center mx-auto">
+                <img />
+
+            </div>
+        </div>
+        <!-- /Left Text -->
+        <!-- Login -->
+        <div class="authentication-bg d-flex col-12 col-lg-5 col-xl-4 align-items-center p-4 p-sm-5">
+            <div class="w-px-400 mx-auto">
+                @* logo here*@
+                <h4 class="mb-2">مرحبا بكم في تسويق ! 👋</h4>
+                <p class="mb-4">يرجى تسجيل الدخول إلى حسابك وبدء المغادرة</p>
+
+                <form id="formAuthentication" class="mb-3" asp-action="Login" asp-controller="Account" method="POST">
+
+                    <div class="mb-3">
+                        <label asp-for="userName" class="form-label"> اسم المسنخدم</label>
+
+                        <input asp-for="userName"
+                               class="form-control"
+                               id="email"
+                               placeholder="إدخل البريد الإلكتروني أو اسم المسنخدم"
+                               autofocus />
+                        <span asp-validation-for="userName" class="alert-danger"></span>
+                    </div>
+                    <div class="form-password-toggle mb-3">
+                        <label class="form-label" asp-for="Password">كلمة السر</label>
+
+
+                        <input asp-for="Password"
+                               id="password"
+                               class="form-control"
+                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                               aria-describedby="password" />
+
+                        <span asp-validation-for="Password" class="alert-danger"></span>
+
+                        <div class="d-flex justify-content-between">
+
+
+                            @*  <a asp-controller="Account" asp-action="ChangePassword">
+                            <small>هل نسيت كلمة السر؟</small>
+                            </a>*@
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <label class="form-check-label" asp-for="RememberMe"> تذكرني </label>
+                            <input class="form-check-input" onclick="onCheck()" type="checkbox" asp-for="RememberMe" id="remember-me" />
+
+                        </div>
+                    </div>
+                    @if (TempData["error"] != null)
+                    {
+                        <span class="alert alert-danger">@TempData["error"]</span>
+                    }
+                    <button type="submit" class="btn btn-info d-grid w-100">تسجيل الدخول</button>
+                </form>
+
+
+
+
+
+
+            </div>
+        </div>
+        <!-- /Login -->
+    </div>
+</div>
+<script>
+    let check = false;
+    function onCheck() {
+        if (check) {
+            document.getElementById("remember-me").value = false;
+            check = !check;
+        } else {
+            document.getElementById("remember-me").value = true;
+
+            check = !check;
+        }
+        //let c = document.getElementById("remember-me").value;
+
+
+    }
+
+</script>

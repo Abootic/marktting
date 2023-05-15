@@ -1,0 +1,142 @@
+﻿@model CommonVm<VisitResultDto>
+<style>
+    .result {
+        flex: 5;
+        width: 4.5rem;
+        display: flex;
+        flex-flow: unset;
+        margin-block: 5px;
+        margin-left: 4px;
+        font-size: 10px;
+        justify-content: right;
+        justify-content: space-between;
+        padding-right: 3px;
+        font-weight: bold;
+        flex-basis: max-content;
+    }
+
+        .result:hover {
+            background-color: #000;
+            opacity: 0.3;
+        }
+
+        .result:focus {
+            background-color: #000;
+            opacity: 0.3;
+        }
+</style>
+<!--- Start form for Create -->
+<div class="offcanvas offcanvas-end" id="offcanvasAdd">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="exampleModalLabel">  نتأج الزيارة </h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-grow-1">
+        <form method="post" id="visitResultDto" class="add-new-record row g-2 pt-0" dir="rtl">
+            @{
+                var FacilityId = TempData.GetTempSave<int>("FacilityId");
+            }
+            @if (FacilityId != 0)
+            {
+                <input type="hidden" name="FacilityId" value="@FacilityId">
+            }
+
+            <div class="col-12" style="background-color:aqua">
+                <label class="form-label" asp-for="obj.Message"></label>
+                <div class="container">
+                    <div class="row" style="background-color:aliceblue">
+                        <div class="col-2 card result result-msg" style="background-color:red">
+
+                            <label class="form-label" style="color:#000">فاشلة </label>
+                            <input type="radio" id="r1" value="فاشلة" class="form-check-input show-msg" name="ResultType">
+                        </div>
+
+                        <div class="col-2 card result  result-form" style="background-color:yellow">
+                            <label class="form-label" style="color:#000"> تغير وقت الزيارة </label>
+                            <input type="radio" id="r2" class="form-check-input show-input-msg" name="ResultType">
+                        </div>
+
+                        <div class="col-2 card result  result-form" style="background-color:skyblue">
+                            <label class="form-label" style="color:#000">  تستلزم التكرار  </label>
+                            <input type="radio" id="r3" class="form-check-input show-input-msg" name="ResultType">
+
+                        </div>
+
+                        <div class="col-2 card result  result-msg" style="background-color:greenyellow">
+                            <label class="form-label" style="color:#000">  شبة ناجحة     </label>
+                            <input type="radio" id="r4" value=" موافق ولكن يحتاج تفاوض" class="form-check-input show-msg" name="ResultType">
+                        </div>
+
+                        <div class="col-2 card result  result-msg" style="background-color:lawngreen">
+                            <label class="form-label" id="r5" style="color:#000">ناجحة</label>
+                            <input type="radio" value="تم تقديم الطلب" class="form-check-input  show-msg" name="ResultType">
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" id="Message" style="display:none">
+                <label class="form-label" asp-for="obj.Message"></label>
+                <input type="text" id="input-message" class="form-control" name="Message">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+
+                <button type="submit" class="btn btn-primary d-grid w-100 mb-2 send-btn">اضافة</button>
+                <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                    إلغاء
+                </button>
+                <div></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let flag1 = false;
+    let flag2 = false;
+    $(".result-form").on("click", function () {
+        $("#Message").show();
+        $("#input-message").val($(this).val());
+        document.getElementById("input-message").readOnly = false;
+        flag2 = !flag2;
+        document.querySelector(".show-input-msg").checked = flag2;
+        document.querySelector(".show-msg").checked = false;
+    });
+
+    $(".result-msg").on("click", function () {
+        $("#Message").show();
+        $("#input-message").val($(".show-msg").val());
+        document.getElementById("input-message").readOnly = true;
+        flag1 = !flag1;
+
+        let radios = document.querySelector(".show-msg");
+        radios.checked = flag1;
+
+        groups = {};
+        var all_input = document.querySelectorAll('input[type="radio"]');
+        for (var i = 0; i < all_input.length; ++i) {
+            if (!(all_input[i].name in groups)) {
+                groups[all_input[i].name] = 0;
+            } else {
+                groups[all_input[i].name] += 1;
+            }
+
+
+        }
+        var message = Object.keys(groups).length;
+        console.log(message);
+
+
+        //document.querySelector(".show-msg").checked = flag;
+
+        document.querySelector(".show-input-msg").checked = false;
+
+
+    });
+</script>

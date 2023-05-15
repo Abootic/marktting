@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\markettng.props" />
+</Project>

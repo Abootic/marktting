@@ -1,0 +1,125 @@
+﻿@using Base.Repositories.Interfaces;
+@inject IRolesRepository roleManager
+@model UserAndRoleVm
+@{
+    var res = await roleManager.GetAll();
+}
+<style>
+    .result {
+        border: 1 solid;
+        margin-block: 17px;
+        border: 1px solid black;
+        /* justify-content: space-between; */
+        /* justify-content: center; */
+        padding-block: 10px;
+        margin: 7px;
+        /* height: 7rem; */
+        padding: 18px;
+        align-items: stretch;
+    }
+
+    /*.result:hover {
+                background-color: #fff;
+                opacity: 0.3;
+            }*/
+
+    /*.result:focus {
+                background-color: #fff;
+                opacity: 0.3;
+            }*/
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 173%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        left: -159px;
+        top: 77px;
+    }
+
+    #main-column {
+        background-color: burlywood;
+    }
+
+
+    .checkboxc {
+        left: 1rem;
+        top: 48px;
+        height: 20px;
+        width: 16px;
+        background-color: aqua;
+    }
+
+    #inpu-deptservec {
+        color: black;
+        padding-right: 0px;
+        width: 20rem;
+    }
+</style>
+
+<div class="offcanvas offcanvas-end" id="offcanvasAddRole">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="exampleModalLabel">إضافة صلاحية للمستخدم - </h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-grow-1">
+
+        <form method="post" id="userAndRolesDto" class="add-new-record row g-2 pt-0" dir="rtl">
+
+            <input type="hidden" id="UserId" name="UserId">
+       
+
+            <div class="col-12" id="main-column" style="background-color:aqua">
+                <label class="form-label username" style="justify-content: center; display: flex;"></label>
+                <div class="container-lg" id="container-model">
+                    <div class="row" style="background-color:aliceblue" id="row-dept">
+                        @if (res.Data != null)
+                        {
+                            List<RolesDto> list = new List<RolesDto>();
+                            list = res.Data.ToList();
+                            for (int i = 0; i < list.Count(); i++)
+                            {
+                                <div class="col-12 card result result-msg">
+                                    
+                                    <div class="row" id="@list[i].Id" data-name="@list[i].Id">
+                                        <div class='col-10' id='inpu-deptservec'><input class='form-control' type='text' readonly value="@list[i].Name" >  </div><div class='col-1'>
+                                            <input class='form-check-input checkboxc' name='RoleName' value="@list[i].Name" type='checkbox' readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            }
+                        }
+
+
+
+
+
+
+                    </div>
+                    <div id="service-data" style="background-color:red"></div>
+                </div>
+            </div>
+
+           
+           
+            <div class="col-sm-12">
+
+                <button type="submit" class="btn btn-primary d-grid w-100 mb-2 send-btn">اضافة</button>
+                <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                    إلغاء
+                </button>
+                <div></div>
+            </div>
+        </form>
+    </div>
+</div>

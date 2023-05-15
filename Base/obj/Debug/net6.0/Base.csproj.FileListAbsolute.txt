@@ -1,0 +1,14 @@
+D:\dotnetcore\markettingApp\Base\bin\Debug\net6.0\Base.deps.json
+D:\dotnetcore\markettingApp\Base\bin\Debug\net6.0\Base.runtimeconfig.json
+D:\dotnetcore\markettingApp\Base\bin\Debug\net6.0\Base.dll
+D:\dotnetcore\markettingApp\Base\bin\Debug\net6.0\Base.pdb
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.csproj.AssemblyReference.cache
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.GeneratedMSBuildEditorConfig.editorconfig
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.AssemblyInfoInputs.cache
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.AssemblyInfo.cs
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.csproj.CoreCompileInputs.cache
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.dll
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\refint\Base.dll
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.pdb
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\Base.genruntimeconfig.cache
+D:\dotnetcore\markettingApp\Base\obj\Debug\net6.0\ref\Base.dll

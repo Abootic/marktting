@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net6.0\Base.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net6.0\Base.GlobalUsings.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Base.csproj.nuget.dgspec.json" />
+    <Content Include="obj\Debug\net6.0\Base.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Base.csproj.nuget.g.props" />
+    <None Include="obj\Base.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\net6.0\Base.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net6.0\Base.assets.cache" />
+    <None Include="obj\Debug\net6.0\Base.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net6.0\Base.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net6.0\Base.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net6.0\Base.dll" />
+    <None Include="obj\Debug\net6.0\Base.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net6.0\Base.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net6.0\Base.pdb" />
+    <None Include="obj\Debug\net6.0\refint\Base.dll" />
+    <None Include="obj\Debug\net6.0\ref\Base.dll" />
+    <None Include="obj\project.nuget.cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Constraints\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
+  </ItemGroup>
+
+</Project>

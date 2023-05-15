@@ -1,0 +1,142 @@
+﻿@inject IServiceManager ServiceManager
+@model OrderResultVm
+
+    <style>
+        #myModal{
+        position: fixed;
+        top: 74px;
+        left: 110px;
+        z-index: 1055;
+        display: none;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        outline: 0;
+        }
+    </style>
+<div class="content-wrapper">
+    <div class="card border-1 bg-card ">
+        <div class="card-body">
+            <h4 class="card-title">نتائد الزيارات</h4>
+
+            <div class="dt-action-buttons text-end pt-3 pt-md-1">
+                <div class="dt-buttons">
+                    <button id="show-mmodel" type="button" class="btn btn-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAdd">إضافة خدمة</button>
+                </div>
+            </div>
+          
+        </div>
+       
+     
+    </div>
+</div>
+<!-- Button to Open the Modal -->
+
+
+<!-- The Modal -->
+
+<partial name="_Add" />
+
+
+<script type="module">
+    import { post } from "../js/post.js";
+
+
+    //////////////////// start post
+
+    $(document).on("submit", "#orderResultDtos", (e) => {
+        e.preventDefault();
+       e.stopImmediatePropagation();
+        let ro = $("#FacilityId").attr("value");
+        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        post("../OrderResult/Add", "orderResultDtos", false, "../OrderResult/Index?id=" + ro);
+
+
+    });
+                      //////////////////// end post
+</script>
+
+@* <div class="table-responsive" dir="rtl">
+
+                <table class="table table-striped table-bordered mt-2">
+                    @if (Model != null)
+                    {
+
+                        <thead>
+                            @{
+                                var hj = Model.departmentVm.Count();
+                            }
+
+                            <tr>
+                                @if (Model.departmentVm != null)
+                                {
+
+                                    @foreach (var item in Model.departmentVm)
+                                    {
+
+                                        <th class="th-heder"> @item.Name </th>
+
+                                    }
+
+                                }
+
+
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                            @if (Model.departmentServiceVm.Any() || Model.departmentVm.Any())
+
+                            {
+
+
+                                    @for (int i = 0; i < Model.departmentServiceVm.Count;)
+                                {
+                                    <tr>
+                                       @for(int m=0;m<hj;m++ )
+                                        {
+
+                                            <td class="th-tbody">  @Model.departmentServiceVm.Count  @i  </td>
+                                            ++i;
+                                        }
+
+
+
+
+
+
+
+
+
+                                    </tr>
+
+                                }
+
+
+
+
+
+
+
+
+
+                            }
+
+                        </tbody>
+
+
+
+                    }
+
+
+
+
+                </table>
+
+            </div>
+*@

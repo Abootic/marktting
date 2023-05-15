@@ -1,0 +1,140 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - markettng</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" asp-append-version="true" />
+
+
+    <style>
+        .btn{
+            color: black !important;
+            font-family: Noto Naskh !important;
+            font-size:14px !important;
+            font-weight:bold !important;
+            background-color: #50b3c7 !important;
+        }
+        .pargger {
+            height: 3rem;
+            width: 4rem;
+        }
+
+        .route-title {
+            color: black !important;
+            font-family: Noto Naskh;
+        }
+        form{
+            direction:rtl;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    @if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("manager") || ViewContext.HttpContext.User.IsInRole("user"))
+{
+   
+
+        <div class="side-bar">
+            <!-- add class "side-bar-light" here for light version -->
+            <nav class="navbar navbar-inverse">
+
+                <!-- toogle button -->
+                <button class="navbar-toggler hidden-lg-up" type="button" id="toggler" aria-controls="list-container" aria-label="Toggle side-bar">
+                    <span class="swal2-icon-show">
+                        <div class=" bRMDJf islir" jsname="Q4LuWd">
+                            <img class="pargger" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAACfCAMAAABX0UX9AAAAdVBMVEX///8AAACvr69YWFgtLS2IiIjm5uaLi4ubm5tvb2+Xl5e+vr6lpaX29vYqKirr6+t6enrg4OBCQkIWFhbU1NRJSUlpaWnHx8fa2to4ODi3t7eQkJC6urr39/cdHR3v7+8NDQ0bGxs2NjYkJCRUVFSBgYFra2sdvEXhAAADPUlEQVR4nO3d7XbpQBgF4CGRILSCUh+lh8P9X+JZKVq6+sex39ld8+7nDvZeIZnJzCQEEREREREREREREbnbsOrPsjTNyuWzbXnVSytt+cCuvPmenS4GqwJ77GCRjLcG5Q2f2LHiecW3987OFBO8vx07UVzgW/CInSeyBbS9KTtOdND774KdJj5ge/4uvlari6vPyxPftT2uPnYUihrV3is7CQXs5rFkJ6E4oOpbsZNQvKDqK9lJKMaq7xGw+vTjfYjPW8cIVZ/HQQdy1MtOQoGb85uxoxC8w9oLc3YWghWuvuDoPcfFEFifv8sPefH5+/f7A20vhAk7UFyw2aqzZ3agqObg9kIo2JEiwrcXwjD15UEXE/Qv96zNDhZFaVNeY5Czw1nrWKwP+lIPRuNdnqRFrzs17U5ERERERER+vW2RJuP9gI2im/Ks3640nTOYp9zdyb5tVd42Y2eL4snmCvTzrrdv0J6PmfoT2Nq0T77W+MGWhZ/V7ECRgW8gG3ae2KAPgV12muj+IutjhyEAbij3dNe96OHqS3+w8QNYe0N2EgrYOiE/441rsLHHgJ2EYoaqT5uyHqItgarvbrD6/I05GhmqvoqdhAK2ytTXqvqLNaq+4OLYw+9wq3Q9PrkAp1y27CwEFa4+h6cwbYDtOZw0wG4s8vWmCP+u7cAOFBVsxPHpyI4UUf4Gr8/R9Qeba7nhZexmsUaj8dZhJ4tgVhi11xTYTvutUd43LO/UYL1up2k5td2MKiIiIiIiIr9dXfXLTorK1RL/gbFv3R0S/97Y0eLsubPCw57A3KrAPjtZJEeT9jxceicbg3m/MTtUTPB9+X6uvcYE/KbS2wJT2NLSD56OzT1ZIuvz9dP9AGzP22boBnBDtJ/1GV+An5hNfKT2M9jDi8ffLvDX62Vt0K0Oqj4vg91bsKX12tOm+u6mjyw+BLbG1ONBGsCjNHx+ZBH3bXd2EgrcMX4OZwyQcwZrdhQC5Bl07CwEyDXi/u69wCOsgrMXRQ3syw5vG6LR78p9PfvhPqztsT98eyHUbs4vRR5jcMXHK4/MbGtWMWJnM5fZfiiwOqS7p3LRa2tToIiIiIiIiIiIiMh/+gdJQ36T/RN9qQAAAABJRU5ErkJggg==" data-deferred="1" class="rg_i Q4LuWd" jsname="blue" alt="SVG Hamburger Menu | CSS-Tricks - CSS-Tricks" data-iml="1162.5" data-atf="true">
+                        </div>
+                    </span>
+                </button>
+                <!-- brand name goes below -->
+
+                <a class="navbar-brand route route-title" value="../Home/Home">كوانتم</a>
+                <div class="list-container" id="show-drawer" show="true">
+                    <ul>
+                        <!-- list of side bar elements goes here,-->
+                        @if (ViewContext.HttpContext.User.IsInRole("admin"))
+                        {
+                            <li><a class="route route-title" value="../Account/Index"> <i class="fa fa-sticky-note"></i> <span class="navIcon">المستخدمين</span></a></li>
+                            <li><a class="route route-title" value="../RolesManager/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>الصلاحيات</span></a></li>
+                            <li><a class="route route-title" value="../Reports/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>التقارير</span></a></li>
+                        }
+                        @if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("manager") || ViewContext.HttpContext.User.IsInRole("user"))
+                        {
+                            <li><a class="route" value="../Facility/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>الزيارة</span></a></li>
+                        }
+                        @if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("manager"))
+                        {
+                            <li><a class="route route-title" value="../Department/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>الخدمات</span></a></li>
+                            <li><a class="route route-title" value="../FacilityType/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>انواع المنشأت</span></a></li>
+
+                        }
+
+
+
+
+                        @* <li><a class="route" value="../OrderResult/Index"><span class="navIcon"><i class="pers "></i></span><span>OrderResult</span></a></li>*@
+                        <li><a class="route-title" asp-controller="UserAccess" asp-action="Logout"><span class="navIcon"><i class="pers "></i></span><span>تسجيل الخروج</span></a></li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <span id="error" style="color:red"> </span>
+            <main role="main" class="pb-3" >
+                <div class="content-wrapper" id="main-page">
+
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+
+
+        @*<footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2023 - markettng - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>*@
+        @*  </footer>*@
+        <script defer src="~/lib/sweetalert2/sweetalert2.js"></script>
+        <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script defer defer src="~/lib/toastr/toastr.min.js"></script>
+        <script defer src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script defer type="module" src="~/js/routting.js" asp-append-version="true"></script>
+        <script defer type="module"  src="~/js/site.js" asp-append-version="true"></script>
+
+        <script defer type="module" src="~/js/post.js" asp-append-version="true"></script>
+        <script defer type="module" src="~/js/Edit.js" asp-append-version="true"></script>
+        <script defer type="module" src="~/js/delete.js" asp-append-version="true"></script>
+      
+        @await RenderSectionAsync("Scripts", required: false)
+
+    
+}
+else
+    {
+      
+    <div class="container">
+            <span id="error" style="color:red"></span>
+        <main role="main" class="pb-3">
+            <div class="content-wrapper">
+                    @RenderBody()
+                    <div class="alert alert-warning text-center"><strong>يجب عليك مراجعة المدير لكي يتم تنشيط حسابك </strong>
+                        <a class="route-title" asp-controller="UserAccess" asp-action="Logout"><span class="navIcon"><i class="pers "></i></span><span>تسجيل الدخول</span></a>
+                    </div>
+            </div>
+        </main>
+    </div>
+   
+}
+    </body>
+</html>

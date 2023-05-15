@@ -1,0 +1,256 @@
+﻿@model MainReportVm
+@inject IServiceManager CustomConventer
+<style>
+    .reportName {
+        font-size: 9px;
+        font-weight: bold !important;
+        color: black !important;
+    }
+
+    #note{
+        text-decoration:none;
+    }
+</style>
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="breadcrumb-wrapper py-3 mb-4"><span class="text-muted fw-light"> الإحصائيات   /</span> التقارير  </h4>
+
+
+
+
+
+        @if (Model.viewNumber == 0)
+        {
+            <partial name="_ReportViaUser" />
+        }
+        else if (Model.viewNumber == 1)
+        {
+            <partial name="_ReportViaFacilityType" />
+        }
+        else if (Model.viewNumber == 2)
+        {
+            <partial name="_ReportViaFacilityName" />
+        }
+        else if (Model.viewNumber == 3)
+        {
+            <div class="card">
+                <div class="row">
+                    @if (TempData["check"] != null)
+                    {
+                        <form id="printReportVm" class="inner-form" method="post">
+                            <input type="hidden" name="reportName" value="@CustomConventer.CustomConventer.EncodeJson(Model.data)">
+                            <div id="printReport">
+
+                                <button type="submit" id="printReportIdd" class="btn btn-info d-grid w-100 mb-2">
+                                    طباعة
+                                </button>
+                            </div>
+                        </form>
+                    }
+                    </div>
+                    </div>
+        }
+        @if (Model.data != null)
+        {
+            @if (Model.data.Any())
+            {
+                <div id="report-table" class="card-datatable table-responsive overflow-scroll" dir="rtl">
+                    @{
+                        string reportName = TempData.GetTempSave<string>("reportName");
+                    }
+                    @if (reportName != null)
+                    {
+                        <h4 class="breadcrumb-wrapper py-3 mb-4"><span class="text-muted fw-light reportName"> @reportName </span> </h4>
+                    }
+
+                    <table class="datatables-ajax table table-bordered mt-1">
+
+                        <thead class="border-top">
+
+
+                            <tr>
+
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().Date)</th>
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().vistId)</th>
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().facilityName)</th>
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().facilityActivity)</th>
+                                @if (Model.data.First().facilityType != null)
+                                {
+                                    <th class="th-heder">   @Html.LabelFor(a=>a.data.First().facilityType)</th>
+                                }
+                                @if (Model.data.First().facilityType != null)
+                                {
+                                    <th class="th-heder"> @Html.LabelFor(a=>a.data.First().phoneNubmer)</th>
+                                }
+                                @if (Model.data.First().username != null)
+                                {
+                                    <th class="th-heder"> اسم المسوق</th>
+                                }
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().vistType)</th>
+                                <th class="th-heder">  @Html.LabelFor(a=>a.data.First().address)</th>
+                                @if (Model.data.First().Note != null)
+                                {
+                                    <th class="th-heder">  @Html.LabelFor(a=>a.data.First().Note)</th>
+                                }
+                               
+                               
+                               
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach (var item in Model.data)
+                            {
+
+
+                                <tr>
+
+                                    <td class="td-tbody">@item.Date</td>
+                                    <td class="td-tbody"> @item.vistId</td>
+                                    <td class="td-tbody"> @item.facilityName</td>
+                                    <td class="td-tbody"> @item.facilityActivity</td>
+                                    @if (item.facilityType != null)
+                                    {
+                                        <td class="td-tbody"> @item.facilityType</td>
+                                    }
+
+                                    @if (item.phoneNubmer != null)
+                                    {
+                                        <td class="td-tbody">@item.phoneNubmer</td>
+                                    }
+                                    @if (item.username != null)
+                                    {
+                                        <td class="td-tbody"> @item.username</td>
+                                    }
+                                    <td class="td-tbody"> @item.vistType</td>
+                                    <td class="td-tbody"> @item.address</td>
+                                    @if (!string.IsNullOrWhiteSpace(item.Note) && item.Note!=null )
+                                                {
+                                        @if (item.Note.Length >= 10)
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Note.Substring(0,10);
+                                                <a value=" @item.Note" class="text-center d-flex" id="note" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNote">قرأة المزيد</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="td-tbody">
+                                                @item.Note
+                                            </td>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td class="td-tbody">
+                                            @item.Note
+                                        </td>
+                                        
+                                    }
+
+
+                                       
+                                
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            }
+           
+
+           @* else
+            {
+                <div class="alert alert-info"> لا يوجد بيانات في هذة الفترة</div>
+            }*@
+        } @if (TempData["reportErr"] != null)
+        {
+            <div class="alert alert-info">@TempData["reportErr"]  </div>
+        }
+       
+        
+
+
+
+
+    </div>
+    <partial id="p-note" style="display:none" name="../NoteReader/_note.cshtml" />
+
+
+    <!--content-->
+    <div class="content-backdrop fade"></div>
+</div>
+
+<script type="module">
+    import { post } from "../js/post.js";
+    import { postReport } from "../js/post.js";
+
+
+    //////////////////// start post
+
+    $(document).on("submit", "#reportVm", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        post("../Reports/ReportViaUser", "reportVm", false, "null");
+
+
+    });
+    $(document).on("submit", "#reportFtypeVm", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        post("../Reports/ReportViaFacilityType", "reportFtypeVm", false, "null");
+
+
+    }); $(document).on("submit", "#reportTradeNameVm", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        post("../Reports/ReportViaFacilityName", "reportTradeNameVm", false, "null");
+
+
+    });
+    $(document).on("submit", "#printReportVm", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        postReport("../Reports/PrintReport", "printReportVm");
+
+
+    });
+                                      //////////////////// end post
+       ////////////// start printalis
+   
+        $(document).on("click", "#printReportAlis", function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $("#printReportIdd").trigger("click");
+        });
+
+       ////////////// end printalis
+    //   //// note
+    //$(document).on("click", "#note", function () {
+    //  //  $(this).attr("value");
+    //    $("#p-note").show();
+      
+    //    $("#note-letter").val($(this).attr("value"));
+    //});
+    //   ////////////
+</script>
+

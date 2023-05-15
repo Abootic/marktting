@@ -1,0 +1,115 @@
+﻿@using Base.Repositories.Interfaces;
+@using System.Security.Claims;
+@inject IRepositoryManager RepositoryManager
+@model List<ReportListVm>
+<style>
+   /* @@media print{
+        .route{
+            display:none;
+        }
+    } */
+</style>
+@if (Model != null)
+{
+    @if (Model.Any())
+    {
+      @*  <li><a class="btn btn-info " value="../Reports/Index"><span class="navIcon"><i class="fa fa-star-half-o"></i></span><span>التقارير</span></a></li>*@
+        <div class="content-wrapper">
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
+
+
+                <div class="card-datatable " dir="rtl">
+                  
+                    @if (TempData.GetTemp<string>("reportName") != null)
+                    {
+                        string reportName = TempData.GetTemp<string>("reportName");
+                        <h6  style="color:black"> @reportName  </h6>
+                    }
+
+                    <table class="datatables-ajax table table-bordered mt-1">
+
+                        <thead class="border-top">
+
+
+                            <tr>
+
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.First().Date)</th>
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.First().facilityName)</th>
+                                @if (Model.First().facilityType != null)
+                                {
+                                    <th class="th-heder">   @Html.LabelFor(a=>a.First().facilityType)</th>
+                                }
+                                @if (Model.First().facilityType != null)
+                                {
+                                    <th class="th-heder"> @Html.LabelFor(a=>a.First().phoneNubmer)</th>
+                                }
+                                @if (Model.First().username != null)
+                                {
+                                    <th class="th-heder"> اسم المسوق</th>
+                                }
+
+                                <th class="th-heder">  @Html.LabelFor(a=>a.First().vistType)</th>
+                                <th class="th-heder">  @Html.LabelFor(a=>a.First().vistId)</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+
+                                <tr>
+
+                                    <td class="td-tbody">@item.Date</td>
+                                    <td class="td-tbody"> @item.facilityName</td>
+                                    @if (item.facilityType != null)
+                                    {
+                                        <td class="td-tbody"> @item.facilityType</td>
+                                    }
+
+                                    @if (item.phoneNubmer != null)
+                                    {
+                                        <td class="td-tbody">@item.phoneNubmer</td>
+                                    }
+                                    @if (item.username != null)
+                                    {
+                                        <td class="td-tbody"> @item.username</td>
+                                    }
+                                    <td class="td-tbody"> @item.vistType</td>
+                                    <td class="td-tbody"> @item.vistId</td>
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+                    @{
+                        var userId = ViewContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        string fullname = "unknown";
+                        if (userId != null)
+                        {
+                            var res=  await RepositoryManager.UserRepository.FindByIdAsync(userId);
+                            fullname = res.Data.FullName;
+                        }
+                    }
+                   
+                       @{ string date = TempData.GetTempSave<string>("reportTime");
+                        <div style="color:black" class="text-black" dir="rtl">@fullname المختص<span style="color:black" class="print-time">@date في تاريخ</span> </div>
+                        }
+                    
+                </div>
+            </div>
+        </div>
+    }
+    <script defer type="module"  src="~/js/site.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,94 @@
+﻿@model UserAndRoleVm
+<!--- Start form for Create -->
+<div class="offcanvas offcanvas-end" id="offcanvasAdd">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="exampleModalLabel">إضافة مستخدم - </h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-grow-1">
+        <form method="post" id="userDto" class="add-new-record row g-2 pt-0">
+
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.FullName"></label>
+
+                <input type="text" id="name" class="form-control" name="FullName">
+
+
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.UserName"></label>
+
+                <input type="text" id="username" name="UserName" class="form-control" aria-label="">
+
+
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.Email"></label>
+
+                <input type="email" id="email" class="form-control" name="Email" aria-label="">
+
+
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.Password"></label>
+
+                <input type="text" id="pass" class="form-control" name="Password">
+
+
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+           @* <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.ConfirmPassword"></label>
+
+                <input type="text" name="ConfirmPassword" id="confirm-pass" class="form-control">
+
+
+                <div id="confirm-message">
+                </div>
+                <div class="invalid-feedback"></div>
+            </div>*@
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.PhoneNamber"></label>
+
+                <input type="tel" id="phone-number" name="PhoneNamber" class="form-control" aria-label="">
+
+
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class=" mb-3">
+                <label asp-for="obj.UserType" class="form-label"></label>
+
+                <select class="form-select" name="UserType">
+
+                    <option value="user">مسوق</option>
+                    <option value="admin"> ادمن</option>
+                    <option value="manager"> مدير </option>
+                </select>
+            </div>
+
+            <div class="col-sm-12">
+
+                <button type="submit" class="btn btn-primary d-grid w-100 mb-2  send-btn">اضافة</button>
+                <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                    إلغاء
+                </button>
+                <div></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

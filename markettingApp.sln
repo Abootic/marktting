@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base", "Base\Base.csproj", "{56928926-D180-4DCF-941A-225288ECB56A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "markettng", "markettng\markettng.csproj", "{73F142C1-42CF-4E6D-A13E-7F4D4C524AFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56928926-D180-4DCF-941A-225288ECB56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56928926-D180-4DCF-941A-225288ECB56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56928926-D180-4DCF-941A-225288ECB56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56928926-D180-4DCF-941A-225288ECB56A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F142C1-42CF-4E6D-A13E-7F4D4C524AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F142C1-42CF-4E6D-A13E-7F4D4C524AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F142C1-42CF-4E6D-A13E-7F4D4C524AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F142C1-42CF-4E6D-A13E-7F4D4C524AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB3D2952-9312-431B-BD83-F8EC3FEB9360}
+	EndGlobalSection
+EndGlobal

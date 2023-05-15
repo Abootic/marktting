@@ -1,0 +1,100 @@
+﻿
+<style>
+    .centrarl {
+        position: relative;
+        top: 95px;
+        right: 57px;
+        width: 69rem;
+    }
+
+    .flex-card {
+        width: 22rem;
+        height: 10rem;
+        padding-block: 35px;
+        border-radius: 7px;
+        margin: 4px;
+        background-color: #50b3c7;
+        display: flex;
+        justify-content: center;
+        padding-inline: 10px;
+    }
+
+    .flex-row {
+        margin-block: 10px;
+        padding: 0 26px;
+    }
+
+    .flex-card-body {
+        width: 71rem;
+    }
+
+    .flex-title {
+        color: black;
+        font-weight: bold;
+        font-size: 20px;
+        text-decoration: none;
+        font-family: Nanum Gothic;
+    }
+
+    .route{
+        text-decoration: none;
+        cursor:pointer;
+    }
+</style>
+<div class="content-wrapper">
+    <div class="card border-1 bg-card ">
+
+        <div class="card-body ">
+            <div class="row  flex-row">
+                <div class="col-lg-12 col-md-12 col-xs-1">
+                    <div class="row" style="--bs-gutter-x: 5.5rem; justify-content: center;">
+                        <div class="col-lg-4 col-md-4 col-xs-12 flex-card" >
+                           <a class="route" value="../Reports/Report">
+                               
+                                    <div class="card-body ">
+                                <h4 class="card-title flex-title">الزيارات من قبل كل مسوق</h4>
+                            </div>
+                           </a>
+                        </div>
+                     @*   <div class="col-lg-4 col-md-4 col-xs-12 flex-card">
+                            <a class="route" value="../Reports/Report?id=0">
+                            <div class="card-body ">
+                                <h4 class="card-title flex-title">الزيارات من قبل كل المسوقين</h4>
+                            </div>
+                            </a>
+                        </div>*@
+                        <div class="col-lg-4 col-md-4 col-xs-12 flex-card" >
+                            <a class="route" value="../Reports/Report?id=1">
+                            <div class="card-body ">
+
+                                <h4 class="card-title flex-title">الزيارات من قبل كل نوع منشأة</h4>
+                            </div>
+                            </a>
+                        </div>  
+                        <div class="col-lg-4 col-md-4 col-xs-12 flex-card" >
+                            <a class="route" value="../Reports/Report?id=2">
+                            <div class="card-body ">
+
+                                <h4 class="card-title flex-title">الزيارات حسب اسم منشأة</h4>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12 flex-card">
+                            <a class="route" value="../Reports/ReportSucessOrderResult">
+                                <div class="card-body ">
+
+                                    <h4 class="card-title flex-title">الزيارات حسب  الطلب الناجح</h4>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<script type="module" defer src="~/js/site.js" asp-append-version="true"></script>

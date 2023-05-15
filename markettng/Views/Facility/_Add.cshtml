@@ -1,0 +1,256 @@
+﻿@using Base.Repositories.Interfaces;
+@model FacilityVm
+@inject IFacilityTypeRepository FacilityTypeManager
+@{
+    var FacilityTypeList = await FacilityTypeManager.GetAll();
+}
+<style>
+    .result {
+        flex: 5;
+        width: 4.5rem;
+        display: flex;
+        flex-flow: unset;
+        margin-block: 5px;
+        margin-left: 4px;
+        font-size: 10px;
+        justify-content: right;
+        justify-content: space-between;
+        padding-right: 3px;
+        font-weight: bold;
+        flex-basis: max-content;
+    }
+
+        .result:hover {
+            background-color: #000;
+            opacity: 0.3;
+        }
+
+        .result:focus {
+            background-color: #000;
+            opacity: 0.3;
+        }
+</style>
+<!--- Start form for Create -->
+<div class="offcanvas offcanvas-end" id="offcanvasAdd" dir="rtl">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="exampleModalLabel">إضافة الزيارة - </h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-grow-1">
+        <form method="post" id="facilityDto" class="add-new-record row g-2 pt-0">
+
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.FacilityTypeDto.Name"></label>
+               @* <input type="hidden" id="importance" value="11" name="Importance">*@
+                <div class="row" dir="rtl">
+                    @foreach (var ftype in FacilityTypeList.Data)
+                    {
+                        <div class="col-4">
+                            <label class="form-label"> @ftype.Name</label>
+                            <input type="radio" value="@ftype.Id" class="form-check-input" name="FacilityTypeId">
+                        </div>
+                    }
+
+
+                    @*<div class="col-4">
+                    <label class="form-label">قطاع خاص</label>
+                    <input type="radio" value="قطاع خاص" class="form-check-input" name="FacilityType">
+                    </div> *@
+                    @*<div class="col-4">
+                    <label class="form-label"> قطاع مختلط </label>
+                    <input type="radio" class="form-check-input" value="قطاع مختلط" name="FacilityType">
+                    </div>*@
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.FacilityActivity"></label>
+
+                <input type="text" id="FacilityActivity" class="form-control" name="FacilityActivity">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.TradeName"></label>
+
+                <input type="text" class="form-control" name="TradeName">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.SpecialistName"></label>
+
+                <input type="text" class="form-control" name="specialistName">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.SpecialistAdjective"></label>
+
+                <input type="text" class="form-control" name="specialistadjective">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-12" style="background-color:aqua">
+                <label class="form-label" asp-for="obj.visitResultDto.Message"></label>
+                <div class="container">
+                    <div class="row" style="background-color:aliceblue">
+                        <div id="fuck" onclick="getCodeValue('red')" class="col-2 card result  result-form fuck" style="background-color:red">
+
+                            <label class="form-label" style="color:#000">فاشلة </label>
+                            <input type="radio" class="form-check-input  show-msg" style="display:none" >
+
+                            <input type="radio" id="r1" value="فاشلة" class="form-check-input show-msg show-input-msg" name="visitResultDto.ResultType">
+                            <input type="hidden" id="code" value="red" name="visitResultDto.Code">
+                        </div>
+
+                        <div id="fuck" onclick="getCodeValue('yellow')" class="col-2 card result  result-form fuck" style="background-color:yellow">
+                            <label class="form-label" style="color:#000"> تغير وقت الزيارة </label>
+                            <input type="radio" value="تغير وقت الزيارة" class="form-check-input show-input-msg" name="visitResultDto.ResultType">
+                            <input type="hidden" id="code" value="yellow" name="visitResultDto.Code">
+
+                        </div>
+
+                        <div id="fuck" onclick="getCodeValue('skyblue')" class="col-2 card result  result-form fuck" style="background-color:skyblue">
+                            <label class="form-label" style="color:#000">  تستلزم التكرار  </label>
+                            <input type="radio" value="تستلزم التكرار" class="form-check-input show-input-msg" name="visitResultDto.ResultType">
+                            <input type="hidden" id="code" value="skyblue" name="visitResultDto.Code" />
+                        </div>
+
+                        <div id="fuck" onclick="getCodeValue('greenyellow')" class="col-2 card result  result-msg fuck" style="background-color:greenyellow">
+                            <label class="form-label" style="color:#000">  شبة ناجحة     </label>
+                            <input type="radio" id="r4" value=" موافق ولكن يحتاج تفاوض" class="form-check-input show-msg" name="visitResultDto.ResultType">
+                            <input type="hidden" id="code" value="greenyellow" name="Code">
+                        </div>
+
+                        <div id="fuck" onclick="getCodeValue('lawngreen')" class="col-2 card result  result-msg fuck" style="background-color:lawngreen">
+                            <label class="form-label" id="r5" style="color:#000">ناجحة</label>
+                            <input type="radio" value="تم تقديم الطلب" class="form-check-input  show-msg" name="visitResultDto.ResultType">
+                            <input type="hidden" id="code" value="lawngreen" name="visitResultDto.Code">
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" id="Message" style="display:none">
+                <label class="form-label" asp-for="obj.visitResultDto.Message"></label>
+                <input type="text" id="input-message" style="background-color:skyblue" class="form-control" placeholder="اكنب سبب هنا" name="visitResultDto.Message">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            @*  <div class="col-sm-12">
+            <label asp-for="obj.Importance" class="form-label"></label>
+
+            <select class="form-select" name="Importance">
+
+            <option value="HLevel">اهمية عالية</option>
+            <option value="MLevel"> اهمية متوسطة</option>
+            <option value="WLevel">اهمية منخفظة </option>
+            </select>
+            </div>*@
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.Address"></label>
+
+                <input type="text" id="Address" class="form-control" name="Address">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.communicationChannelDto.PhoneNumber"></label>
+
+                <input type="text" id="other" class="form-control" name="communicationChannelDto.PhoneNumber">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.communicationChannelDto.Link"></label>
+
+                <input type="text" id="other" class="form-control" name="communicationChannelDto.Link">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.other"></label>
+
+                <input type="text" id="other" class="form-control" name="other">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.communicationChannelDto.other"></label>
+
+                <input type="text" id="other" class="form-control" name="communicationChannelDto.other">
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.VisitDto.Reason"></label>
+
+                <textarea type="text" id="other" class="form-control" rows="4" name="VisitDto.Reason"></textarea>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+                <label class="form-label" asp-for="obj.visitResultDto.Note"></label>
+
+                <textarea type="text" id="other" class="form-control" rows="4" name="visitResultDto.Note"></textarea>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-12">
+
+                <button type="submit" class="btn btn-primary d-grid w-100 mb-2 send-btn">اضافة</button>
+                <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                    إلغاء
+                </button>
+                <div></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    //let flag1 = false;
+    //let flag2 = false;
+    function getCodeValue(code) {
+        $("#code").val(code);
+
+
+    }
+
+
+    $(".result-form").on("click", function () {
+        $("#Message").show();
+        $("#input-message").val($(this).val());
+
+        document.getElementById("input-message").readOnly = false;
+        //flag2 = !flag2;
+        console.log("3333333333  " + $("input[name='visitResultDto.Code']").val());
+        console.log("3333333333  " + $("#code").val());
+
+        document.querySelector(".show-msg").checked = false;
+    });
+
+
+    $(".show-msg").on("click", function () {
+        $("#Message").show();
+        $("#input-message").val("");
+       // $("#input-message").val($(this).val());
+
+
+        document.getElementById("input-message").readOnly = false;
+        // flag1 = !flag1;
+
+        let radios = document.querySelector(".show-msg");
+
+
+        document.querySelector(".show-input-msg").checked = false;
+
+
+    });
+</script>
