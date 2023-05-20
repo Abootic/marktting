@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 namespace markettng.Controllers
 {
 
-    [Authorize(Roles = "admin")]
+   [Authorize(Roles = "admin")]
     public class AccountController : BaseApiController
     {
         private readonly IHttpContextAccessor _contextAccessor;
